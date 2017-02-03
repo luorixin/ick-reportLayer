@@ -1,0 +1,176 @@
+#report_layer {border: 1px solid transparent; width:100%;}
+#report_layer ul{margin: 0px;padding: 0px;}
+#report_layer .tree {padding: 3px 10px 10px 2px;height:250px;overflow:auto;background-color:white;}
+#report_layer .tree ul{display:none;}
+#report_layer li {
+	list-style: none;
+	font-size: 12px;
+	min-height: 22px;
+	line-height: 22px;
+	color: #333;
+	margin: 3px 0px 3px 3px;
+	position: relative;
+}
+#report_layer .tree li span{
+	width: 89%;
+	height: 100%;
+	display: block;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	max-width: 190px;
+}
+#report_layer .parent_layer .tree li span:hover  {
+	
+	background-color: #ededed;
+	cursor: pointer;
+}
+#report_layer .child_layer .tree li:hover  {
+	
+	background-color: #ededed;
+	cursor: pointer;
+}
+#report_layer .tree li:hover .delete{
+	display: block;
+}
+#report_layer .tree li .delete{
+	display: block;
+	position:absolute;
+	right:0px;
+	top:2px;
+	cursor:pointer;
+	padding-right: 5px;
+}
+#report_layer .tree li span.select{
+	background-color: #e5392a;
+	color:white;
+}
+#report_layer .tree li span.selected{
+	color:#CEC0C0;
+}
+#report_layer .tree li span.disabled{
+	color: #CEC0C0;
+}
+#report_layer  li.removed>span{
+	/*display: none!important;*/
+	color: #CEC0C0;
+}
+
+#report_layer .parent_layer{
+	width:220px;
+	-webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+	border:1px solid #ddd;
+	border-radius:5px; 
+	-webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    font-size: 12px;
+    float: left;
+}
+#report_layer .child_layer{
+	width:220px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+	border: 1px solid #ddd;
+	border-radius:5px; 
+	-webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    font-size: 12px;
+    margin-left: 10px;
+    float: left;
+}
+#report_layer .pannel{
+	clear: both;
+	height: 24px;
+	padding: 0px;
+	margin:0px;
+	font:bold 12px/24px Arial;
+	background-color: #e6e6e6;
+}
+#report_layer .pannel>span{
+	margin:5px;
+}
+#report_layer .pannel li{
+	float: left;
+	text-align: center;
+	height: 100%;
+	width: 50%;
+	margin: 0px;
+}
+#report_layer .pannel li.active{background-color: #fff;}
+#report_layer .pannel li a{
+	font-size: 12px;
+	height: 22px;
+	line-height: 22px;
+	display: block;
+	color: #333;
+	margin: 0 !important;
+	padding: 0 5px;
+	text-decoration: none;
+}
+#report_layer .pannel li:last-child a {
+    border-radius: 0 5px 0 0 !important;
+}
+#report_layer .parent_layer .tree li  .transform-ico{
+	width: 22px;
+    height:22px;
+    background: url("../img/change.png") no-repeat right transparent;
+    display: inline-block;
+    text-align: center;
+    color: #333;
+    vertical-align: middle;
+    position: absolute;
+    top:0px;
+    right: 0px;
+    cursor: pointer;
+}
+#report_layer .tree li i.threeline-ico{
+	line-height: 0;
+    margin-top: 5px;
+    width: 16px;
+    height: 16px;
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    float: left;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-image:url("../img/threeline-ico.png"); 
+
+}
+#report_layer .tree li span:hover+.transform-ico{
+	background-color: #ebebeb;
+}
+#report_layer .button_layer{
+    -webkit-box-flex:1;
+    -moz-box-flex:1;
+    -webkit-box-ordinal-group:2;
+    -moz-box-ordinal-group:2;
+    margin:auto 5px;
+    position: relative;
+}
+#report_layer .tree li i.button.center_close{
+	background-position:-74px -18px;
+}
+#report_layer .tree li i.button.center_open{
+	background-position:-92px -18px;
+}
+#report_layer .tree li i.button.switch{
+	weight:18px;
+	height: 18px;
+}
+#report_layer .tree li i {line-height:16px; margin-right:2px}
+#report_layer .tree li i.button {line-height:0; margin:0; width:16px; height:16px;float: left; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;float: left;
+	background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+	background-image:url("../images/shared/components/icoFromZtree.gif"); *background-image:url("../images/shared/components/icoFromZtree.gif")}
+
+#report_layer .tree li ul.line{ background:url(../images/shared/components/line_conn.gif) 0 0 repeat-y;padding: 0 0 0 13px}
+
+#report_layer a {text-decoration:underline;}
+
+

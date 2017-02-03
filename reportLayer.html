@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="./css/reportLayer.css" />
+	<script type="text/javascript" src="./jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="./Sortable.js"></script><!--必须放在插件前面-->
+	<script type="text/javascript" src="./js/reportLayer.js"></script>
+
+</head>
+<body>
+	<form action="" id="treeForm" submit="return false;" methode="post">
+		
+		<label>campaign:</label><input name="campaign" id="campaign"  type="text" value="" />
+		<input type="button" onclick="setCampaign()" value="提交"/>
+		<br>
+		<label>shortCut:</label><input name="shortCut" id="shortCut"  type="text" value="" />
+		<input type="button" onclick="setShortcut()" value="提交"/>
+		<br>
+		<label>event:</label><input name="event" id="event"  type="text"  value="event" />
+		<input type="button" onclick="setEvent()" value="提交"/>
+		<br>
+		<label>changinit:</label><input name="init" id="init"  type="text"  value="{'key':'is_have_3rd_party','val':true}" />
+		<input type="button" onclick="changinit()" value="提交"/>
+		<br>
+		<input name="result" id="result" type="text"/>
+		<div class="" id="reportLayer" style="width:500px;height:500px">
+		</div>
+
+		
+		
+		
+		
+		
+	</form>
+	
+	<script type="text/javascript">
+		
+		var is_not_show_expense=false;
+		var is_have_3rd_party = false;
+        var multi = new report_layer({
+		  container : $("#reportLayer"),
+		  // lang : 'EN',
+		  lang : "EN", //"CN" "EN"
+		  values :[{"tabName":"尺寸","tabName_en":"Dimensions","tabValues" :[
+		  {"name":"层级","name_en":"Level","audience_id":"level","children":[{"name":"推广计划","name_en":"Campaign","audience_id":"campaign_id"},{"name":"创意组合","name_en":"Ad Group","audience_id":"adgroup_id"},{"name":"广告素材","name_en":"Creative","audience_id":"adtext_id"}]},
+		  {"name":"趋势","name_en":"Trend","audience_id":"trend","children":[{"name":"日期","name_en":"Date","audience_id":"date"},{"name":"星期","name_en":"Week","audience_id":"week"},{"name":"月份","name_en":"Month","audience_id":"month"},{"name":"小时","name_en":"Hour","audience_id":"hour"},{"name":"周天","name_en":"Day of Week","audience_id":"day_of_week"}]},
+		  {"name":"素材","name_en":"Creative","audience_id":"creative","children":[{"name":"素材尺寸","name_en":"Ad Dimension","audience_id":"ad_dimension"},{"name":"着陆页地址","name_en":"Landing URL","audience_id":"landing_url"}]},
+		  {"name":"媒体","name_en":"Media","audience_id":"media","children":[{"name":"广告位","name_en":"Ad Placement","audience_id":"ad_placement"},{"name":"网站","name_en":"Website","audience_id":"domain"}]},
+		  {"name":"地域","name_en":"Geo Location","audience_id":"geo","children":[{"name":"国家","name_en":"Country","audience_id":"country_id"},{"name":"省份","name_en":"Province","audience_id":"province_id"},{"name":"城市","name_en":"City","audience_id":"city_id"}]},
+		  {"name":"人群","name_en":"Audience","audience_id":"audience","children":[{"name":"年龄","name_en":"Age","audience_id":"age"},{"name":"性别","name_en":"Gender","audience_id":"gender"},{"name":"兴趣组别","name_en":"Interest Group","audience_id":"interest"},{"name":"关键词","name_en":"Keyword","audience_id":"keyword"}]},
+		   ] },
+		  	{"tabName":"公制","tabName_en":"Metrics","tabValues" :[
+		  {"name":"投放表现","name_en":"Performance","audience_id":"performance","children":[{"name":"展示量","name_en":"Impressions","audience_id":"impressions"},{"name":"点击量","name_en":"Clicks","audience_id":"clicks"},{"name":"点击率","name_en":"CTR","audience_id":"ctr"},{"name":"CPM","name_en":"CPM","audience_id":"cpm"},{"name":"CPC","name_en":"CPC","audience_id":"cpc"},{"name":"花费","name_en":"Expenses","audience_id":"expenses"},{"name":"独立展现量","name_en":"Unique Views","audience_id":"unique_views"},{"name":"独立点击量","name_en":"Unique Clicks","audience_id":"unique_clicks"}]},
+		  {"name":"第三方监测","name_en":"3rd Party Tracking","audience_id":"3rdparty","children":[{"name":"展现量（第三方监测）","name_en":"Impressions (3rd Party)","audience_id":"impressions_third_party"},{"name":"点击量（第三方监测）","name_en":"Clicks (3rd Party)","audience_id":"clicks_third_party"},{"name":"点击率（第三方监测）","name_en":"CTR (3rd Party)","audience_id":"ctr_third_party"},{"name":"独立展现量","name_en":"Unique Views (3rd Party)","audience_id":"unique_views_third_party"},{"name":"独立点击量","name_en":"Unique Clicks(3rd Party)","audience_id":"unique_clicks_third_party"},{"name":"展现量差异","name_en":"Impressions Discrepancies (3rd Party)","audience_id":"impressions_discrepancies_third_party"},{"name":"点击量差异","name_en":"Clicks Discrepancies (3rd Party)","audience_id":"clicks_iscrepancies_third_party"}
+		  ]},
+		  {"name":"到站表现","name_en":"Post-click Engagement","audience_id":"postengage","children":[{"name":"访问量","name_en":"Visits","audience_id":"visit"},{"name":"独立访问人数","name_en":"Unique Visitors","audience_id":"uv"},{"name":"浏览量","name_en":"Pageviews","audience_id":"pv"},{"name":"二跳率","name_en":"PV/Visit>1(%)","audience_id":"engagement_rate"},{"name":"平均访问时长","name_en":"Avg. Visits Duration","audience_id":"duration"}]},
+		  {"name":"转化表现","name_en":"Conversion","audience_id":"conversion","children":[{"name":"浏览转化量","name_en":"View-Through Conversions","audience_id":"pi_conversions"},{"name":"浏览转化率","name_en":"VTC%","audience_id":"pi_conversions_rate"},{"name":"浏览转化收入","name_en":"VTC Revenue","audience_id":"pi_revenue"},{"name":"点击转化量","name_en":"Click-Through Conversions","audience_id":"pc_conversions"},{"name":"点击转化率","name_en":"CTC%","audience_id":"pc_conversions_rate"},{"name":"点击转化收入","name_en":"CTC Revenue","audience_id":"pc_revenue"},{"name":"转化成本","name_en":"Cost Per Conversion","audience_id":"cost_per_conversion"},{"name":"投入产出比","name_en":"ROI","audience_id":"roi"}]},
+		  
+		   ] }
+		   ],
+		   rules:[{
+		   	"ruleType":"productType","rules":[
+		   	{"planType":"GDN","condition":"unique_views,unique_clicks,impressions_third_party,clicks_third_party,ctr_third_party,unique_views_third_party,unique_clicks_third_party,impressions_discrepancies_third_party,clicks_iscrepancies_third_party,hour,ad_placement,domain,country_id,province_id,city_id,age,gender,interest,keyword"},
+		   	{"planType":"AD EXCHANGE CHINA","condition":"ad_placement"},
+		   	{"planType":"AD EXCHANGE DoubleClick","condition":"ad_placement,age,gender,interest,province_id,city_id,keyword"},
+		   	{"planType":"PREMIUM NETWORK","condition":"keyword"},
+		   	{"planType":"OTV","condition":"keyword"},
+		   	{"planType":"DIRECT PUBLISHER,EXTERNAL MEDIA,MOTV MEDIA,MOSOCIAL MEDIA,MOFEED MEDIA","condition":"ad_dimension,ad_placement,keyword"}]
+		   }
+		   ],
+		   addRules:[/*{"exColumn":"adgroup_id","disColumns":"impressions_third_party,clicks_third_party,ctr_third_party,unique_views_third_party,unique_clicks_third_party,impressions_discrepancies_third_party,clicks_iscrepancies_third_party"
+		   },*/{
+		   	"exColumn":"domain,interest,keyword,age,gender,adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,hour,day_of_week","disColumns":"impressions_third_party,clicks_third_party,ctr_third_party,unique_views_third_party,unique_clicks_third_party,impressions_discrepancies_third_party,clicks_iscrepancies_third_party,unique_views,unique_clicks,visit,uv,pv,engagement_rate,duration"
+		   },{
+		   	"exColumn":"interest,keyword,age,gender,adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,day_of_week,hour","disColumns":"domain"
+		   },{
+		   	"exColumn":"domain,keyword,age,gender,adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,day_of_week,hour","disColumns":"interest"
+		   },{
+		   	"exColumn":"domain,interest,age,gender,adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,day_of_week,hour","disColumns":"keyword"
+		   },{
+		   	"exColumn":"domain,interest,keyword,adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,day_of_week,hour","disColumns":"age,gender"
+		   },{
+		   	"exColumn":"domain,interest,keyword,age,gender","disColumns":"adtext_id,ad_dimension,landing_url,ad_placement,country_id,province_id,city_id,week,month,day_of_week,hour"
+		   }
+
+		   ],
+		   autoColumn:[{
+		   	"autoType":"shortcut","clear":true,"autoColumns":[{
+		   		"type":"Trend","columns":"date,campaign_id,impressions,clicks,ctr,cpm,cpc,expenses"
+		   	},{"type":"Creative","columns":"adtext_id,ad_dimension,landing_url,impressions,clicks,ctr,cpm,cpc,expenses"}
+		   	,{"type":"Geo","columns":"country_id,province_id,city_id,impressions,clicks,ctr,cpm,cpc,expenses"}
+		   	,{"type":"Audience","columns":"adgroup_id,impressions,clicks,ctr,cpm,cpc,expenses"}
+		   	,{"type":"Media","columns":"domain,impressions,clicks,ctr,cpm,cpc,expenses"}]
+		   },
+		   {"autoType":"event","clear":false,"autoColumns":[{"type":"event","columns":"pi_conversions,pi_conversions_rate,pi_revenue,pc_conversions,pc_conversions_rate,pc_revenue,cost_per_conversion,roi"}]
+			}		   
+		   ],
+		   clearColumn:[{
+		   	"clearType":"event","clearColumn":"pi_conversions,pi_conversions_rate,pi_revenue,pc_conversions,pc_conversions_rate,pc_revenue,cost_per_conversion,roi"
+		   }],
+		   fixOrder:"impressions,clicks,ctr,cpm,cpc,expenses,unique_views,unique_clicks,impressions_third_party,clicks_third_party,ctr_third_party,unique_views_third_party,unique_clicks_third_party,impressions_discrepancies_third_party,clicks_iscrepancies_third_party,visit,uv,pv,engagement_rate,duration,pi_conversions,pi_conversions_rate,pi_revenue,pc_conversions,pc_conversions_rate,pc_revenue,cost_per_conversion,roi",
+		   initRule:[{"ruleKey":"is_not_show_expense","isRule":is_not_show_expense,"rules":"cpm,cpc,expenses,pi_revenue,pc_revenue,cost_per_conversion,roi"},
+		   {"ruleKey":"is_have_3rd_party","isRule":is_have_3rd_party,"rules":"impressions_third_party,clicks_third_party,ctr_third_party,unique_views_third_party,unique_clicks_third_party,impressions_discrepancies_third_party,clicks_iscrepancies_third_party"}
+		   ],
+
+		   // selected:["1218","1219","1220","1221","1222","1223","1224","1225","1226"],
+		  // ["66a1","66a11","66a111","66a1111","66a1112","66a13","66a14","66a3"],//
+		  	result:$("#result"),
+		  	callback:callBackFun
+
+		  
+		})
+		function callBackFun(ids){
+			// console.log(ids);
+		}
+		function setCampaign(){
+			var campaigns=$("#campaign").val().split(",");//["GDN","OTV"];
+			multi.setCampaign(campaigns);
+		}
+		function setShortcut(){
+			var autoId = $("#shortCut").val();
+			var autoType ="shortcut";
+			multi.setAutoColumn(autoType,autoId);
+		}
+		function setEvent(){
+			var autoId = $("#event").val();
+			var autoType ="event";
+			if(autoId=="none"){
+				multi.clearColumns(autoType);
+			}else{
+				multi.setAutoColumn(autoType,autoId);
+			}
+			console.log(multi.minus([1,2,3],[1,2,3]));
+		}
+		function changinit(){
+			var changinit = $("#init").val();
+			multi.changeInit( eval('(' + changinit + ')')); 
+		}
+		multi.setAutoColumn("shortcut","Trend");
+	</script>
+	
+</body>
+</html>
